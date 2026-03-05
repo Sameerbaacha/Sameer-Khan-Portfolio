@@ -1,4 +1,5 @@
 import { personalInfo } from "@/data/portfolio";
+import { Github, Linkedin, MailIcon, } from "lucide-react";
 
 const Footer = () => (
   <footer className="border-t border-border/50 py-8">
@@ -8,13 +9,13 @@ const Footer = () => (
       </p>
       <div className="flex gap-4">
         <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors text-base">
-          GitHub
+          <Github size={25} /> 
         </a>
         <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors text-base">
-          LinkedIn
+          <Linkedin size={25} />  
         </a>
         <a href={`mailto:${personalInfo.email}`} className="text-muted-foreground hover:text-primary transition-colors text-base">
-          Email
+         <MailIcon size={25} />  
         </a>
       </div>
     </div>

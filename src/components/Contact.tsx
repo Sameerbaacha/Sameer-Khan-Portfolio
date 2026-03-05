@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { personalInfo } from "@/data/portfolio";
 import { useToast } from "@/hooks/use-toast"; // import your toast hook
+import { Github, Linkedin,  MailIcon, PhoneCall, } from "lucide-react";
 
 const Contact = () => {
   const ref = useRef(null);
@@ -22,41 +23,41 @@ const Contact = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  if (!validate()) return;
-  if (loading) return;
+    e.preventDefault();
+    if (!validate()) return;
+    if (loading) return;
 
-  setLoading(true);
+    setLoading(true);
 
-  try {
-    const subject = encodeURIComponent(`Message from ${form.name}`);
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
-    );
+    try {
+      const subject = encodeURIComponent(`Message from ${form.name}`);
+      const body = encodeURIComponent(
+        `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
+      );
 
-    // 👇 this opens user's email client
-    window.location.href = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`;
+      // 👇 this opens user's email client
+      window.location.href = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`;
 
-    // reset form
-    setForm({ name: "", email: "", message: "" });
-    setErrors({});
+      // reset form
+      setForm({ name: "", email: "", message: "" });
+      setErrors({});
 
-    toast({
-      title: "Email client opened",
-      description: "Please send the email from your mail app.",
-      variant: "subtleSuccess",
-    });
-  } catch (err) {
-    console.error("Mailto failed:", err);
-    toast({
-      title: "Failed",
-      description: "Could not open email client.",
-      variant: "destructive",
-    });
-  } finally {
-    setLoading(false);
-  }
-};
+      toast({
+        title: "Email client opened",
+        description: "Please send the email from your mail app.",
+        variant: "subtleSuccess",
+      });
+    } catch (err) {
+      console.error("Mailto failed:", err);
+      toast({
+        title: "Failed",
+        description: "Could not open email client.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section id="contact">
@@ -145,9 +146,46 @@ const Contact = () => {
             <div className="glass-card p-6">
               <h3 className="font-heading font-semibold text-foreground mb-4">Get in Touch</h3>
               <div className="space-y-4 text-base text-muted-foreground">
-                <a href={`mailto:${personalInfo.email}`} className="flex items-center gap-3 hover:text-primary transition-colors">{personalInfo.email}</a>
-                <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-primary transition-colors">GitHub</a>
-                <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-primary transition-colors">LinkedIn</a>
+
+                {/* Email */}
+                <a
+                  href={`mailto:${personalInfo.email}`}
+                  className="flex items-center gap-3 hover:text-primary transition-colors"
+                >
+                  <MailIcon size={25} />
+                  {personalInfo.email}
+                </a>
+
+                {/* GitHub */}
+                <a
+                  href={personalInfo.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 hover:text-primary transition-colors"
+                >
+                  <Github size={25} />
+                  GitHub
+                </a>
+
+                {/* LinkedIn */}
+                <a
+                  href={personalInfo.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 hover:text-primary transition-colors"
+                >
+                  <Linkedin size={25} />
+                  LinkedIn
+                </a>
+                <a
+                  href="https://wa.me/03150365039" // apna number daalo yahan
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 hover:text-green-500 transition-colors"
+                >
+                  <PhoneCall size={25} />
+                  Chat on WhatsApp
+                </a>
               </div>
             </div>
           </motion.div>
